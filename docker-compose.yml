@@ -1,0 +1,28 @@
+version: '3.8'
+services:
+  db:
+    image: mongo:latest
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: Micro
+      MONGO_INITDB_ROOT_PASSWORD: Docker
+    ports:
+      - 27018:27017
+ 
+
+  app:
+    build: .
+    restart: always
+    ports:
+      - '3000:4000'
+    depends_on:
+      - db
+
+  login:
+    build: .
+    restart: always
+    ports:
+      - '3001:5000'
+    depends_on:
+      - db
+  
